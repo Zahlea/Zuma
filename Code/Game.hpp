@@ -9,6 +9,7 @@ public:
 	Game();
 
 	bool Run();
+	void QuitGame();
 
 private:
 	sf::RenderWindow mWindow;

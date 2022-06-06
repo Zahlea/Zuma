@@ -23,6 +23,11 @@ bool Game::Run()
 	return mWindow.isOpen();
 }
 
+void Game::QuitGame()
+{
+	mWindow.close();
+}
+
 void Game::Update()
 {
 }
