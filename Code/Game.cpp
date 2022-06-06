@@ -30,5 +30,6 @@ void Game::Update()
 void Game::Draw()
 {
 	mWindow.clear({ 100, 149, 237, 255 });
+	mWindow.draw(mBallTrack);
 	mWindow.display();
 }

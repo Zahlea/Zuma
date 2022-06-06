@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Track.hpp"
+
 class Game {
 public:
 	Game();
@@ -10,6 +12,8 @@ public:
 
 private:
 	sf::RenderWindow mWindow;
+
+	Track mBallTrack;
 
 	void Update();
 	void Draw();
