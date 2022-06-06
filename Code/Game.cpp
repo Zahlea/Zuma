@@ -3,7 +3,7 @@
 #include <iostream>
 
 Game::Game()
-	: mWindow(sf::VideoMode(200, 200), "SFML works!")
+	: mWindow(sf::VideoMode(1280, 720), "Zuma")
 	, mShape(100.f)
 {
 	mShape.setFillColor(sf::Color::Green);
@@ -32,7 +32,7 @@ void Game::Update()
 
 void Game::Draw()
 {
-	mWindow.clear();
+	mWindow.clear({ 100, 149, 237, 255 });
 	mWindow.draw(mShape);
 	mWindow.display();
 }
