@@ -30,6 +30,10 @@ void Game::QuitGame()
 
 void Game::Update()
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+	{
+		QuitGame();
+	}
 }
 
 void Game::Draw()
