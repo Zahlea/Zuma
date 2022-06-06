@@ -4,7 +4,9 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(1280, 720), "Zuma")
-{}
+{
+	mGameTime.restart();
+}
 
 bool Game::RunFrame()
 {
@@ -17,7 +19,7 @@ bool Game::RunFrame()
 		}
 	}
 
-	Update();
+	Update(mGameTime.restart().asSeconds());
 	Draw();
 
 	return mWindow.isOpen();
@@ -28,7 +30,7 @@ void Game::QuitGame()
 	mWindow.close();
 }
 
-void Game::Update()
+void Game::Update(float deltaTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 	{

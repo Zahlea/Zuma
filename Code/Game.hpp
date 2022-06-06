@@ -13,9 +13,10 @@ public:
 
 private:
 	sf::RenderWindow mWindow;
+	sf::Clock mGameTime;
 
 	Track mBallTrack;
 
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 };
