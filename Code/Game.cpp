@@ -6,7 +6,7 @@ Game::Game()
 	: mWindow(sf::VideoMode(1280, 720), "Zuma")
 {}
 
-bool Game::Run()
+bool Game::RunFrame()
 {
 	sf::Event event;
 	while (mWindow.pollEvent(event))

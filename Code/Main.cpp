@@ -4,7 +4,7 @@ int main()
 {
     Game game;
 
-    while(game.Run());
+    while(game.RunFrame());
 
     return 0;
 }

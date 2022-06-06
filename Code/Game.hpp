@@ -8,7 +8,7 @@ class Game {
 public:
 	Game();
 
-	bool Run();
+	bool RunFrame();
 	void QuitGame();
 
 private:
