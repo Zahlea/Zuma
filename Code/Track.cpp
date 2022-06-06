@@ -4,17 +4,20 @@ sf::Color cLineColour(sf::Color::Black);
 sf::Color cGuidePointColour(sf::Color::Blue);
 sf::Color cControlPointColour(sf::Color::Red);
 sf::Color cSelectedPointColour(sf::Color::Yellow);
-float cLineThickness(3.f);
-float cGuidePointThickness(3.f);
-float cControlPointThickness(6.f);
+float cLineThickness(6.f);
+float cGuidePointThickness(6.f);
+float cControlPointThickness(12.f);
 
 Track::Track()
 {
 	mPoints.push_back({ 150.f, 450.f });		// Guide point 0
 	mPoints.push_back({ 180.f, 300.f });		// Spline point 0
-	mPoints.push_back({ 360.f, 210.f });		// Spline point 1
-	mPoints.push_back({ 450.f, 360.f });		// Spline point 2
-	mPoints.push_back({ 480.f, 180.f });		// Guide point 1
+	mPoints.push_back({ 450.f, 210.f });		// Spline point 1
+	mPoints.push_back({ 600.f, 360.f });		// Spline point 2
+	mPoints.push_back({ 960.f, 60.f });			// Spline point 3
+	mPoints.push_back({ 660.f, 600.f });		// Spline point 4
+	mPoints.push_back({ 300.f, 420.f });		// Spline point 5
+	mPoints.push_back({ 270.f, 300.f });		// Guide point 1
 }
 
 sf::Vector2f Track::GetPointOnSpline(float t) const
