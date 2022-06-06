@@ -10,7 +10,6 @@ public:
 
 private:
 	sf::RenderWindow mWindow;
-	sf::CircleShape mShape;
 
 	void Update();
 	void Draw();

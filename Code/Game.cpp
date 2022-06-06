@@ -4,10 +4,7 @@
 
 Game::Game()
 	: mWindow(sf::VideoMode(1280, 720), "Zuma")
-	, mShape(100.f)
-{
-	mShape.setFillColor(sf::Color::Green);
-}
+{}
 
 bool Game::Run()
 {
@@ -33,6 +30,5 @@ void Game::Update()
 void Game::Draw()
 {
 	mWindow.clear({ 100, 149, 237, 255 });
-	mWindow.draw(mShape);
 	mWindow.display();
 }
