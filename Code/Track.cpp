@@ -1,5 +1,9 @@
 #include "Track.hpp"
 
+#include <iostream>
+
+#include "InputWrapper.hpp"
+
 sf::Color cLineColour(sf::Color::Black);
 sf::Color cGuidePointColour(sf::Color::Blue);
 sf::Color cControlPointColour(sf::Color::Red);
@@ -22,7 +26,24 @@ Track::Track()
 
 void Track::Update(float deltaTime)
 {
+	bool isMouseClicked = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	if (isMouseClicked && !mWasMouseClicked)
+	{
+		float thicknessSqr = cControlPointThickness * cControlPointThickness;
+		for (int i = 0; i < static_cast<int>(mPoints.size()); ++i)
+		{
+			sf::Vector2f mousePosition = static_cast<sf::Vector2f>(InputWrapper::GetMousePosition());
+			sf::Vector2f mouseDelta = mousePosition - mPoints[i];
+			float distanceFromPointSqr = mouseDelta.x * mouseDelta.x + mouseDelta.y * mouseDelta.y;
 
+			if (std::abs(distanceFromPointSqr) < thicknessSqr) {
+				mSelectedPointIndex = i;
+				std::cout << "Selected index: " << i << std::endl;
+				break;
+			}
+		}
+	}
+	mWasMouseClicked = isMouseClicked;
 }
 
 sf::Vector2f Track::GetPointOnSpline(float t) const
@@ -57,10 +78,10 @@ void Track::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(CreateCircle(cLineThickness, GetPointOnSpline(t), cLineColour));
 	}
 
-	target.draw(CreateCircle(cGuidePointThickness, mPoints[0], cGuidePointColour));
+	target.draw(CreateCircle(cGuidePointThickness, mPoints[0], (mSelectedPointIndex == 0 ? cSelectedPointColour : cGuidePointColour)));
 
 	int endGuideIndex = static_cast<int>(mPoints.size()) - 1;
-	target.draw(CreateCircle(cGuidePointThickness, mPoints[endGuideIndex], cGuidePointColour));;
+	target.draw(CreateCircle(cGuidePointThickness, mPoints[endGuideIndex], (mSelectedPointIndex == endGuideIndex ? cSelectedPointColour : cGuidePointColour)));;
 
 	for (int i = 1; i <= static_cast<int>(mPoints.size()) - 2; ++i)
 	{
@@ -72,7 +93,7 @@ sf::RectangleShape Track::CreateControlPoint(const int index) const
 {
 	sf::RectangleShape splineControlPoint({ cControlPointThickness, cControlPointThickness });
 	splineControlPoint.setPosition(mPoints[index]);
-	splineControlPoint.setFillColor(cControlPointColour);
+	splineControlPoint.setFillColor(mSelectedPointIndex == index ? cSelectedPointColour : cControlPointColour);
 	splineControlPoint.setOrigin({ cControlPointThickness * 0.5f, cControlPointThickness * 0.5f });
 
 	return splineControlPoint;

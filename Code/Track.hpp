@@ -12,6 +12,9 @@ public:
 
 private:
 	std::vector<sf::Vector2f> mPoints;
+	int mSelectedPointIndex{ -1 };
+
+	bool mWasMouseClicked{ false };
 
 	sf::Vector2f GetPointOnSpline(float t) const;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
