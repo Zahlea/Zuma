@@ -2,10 +2,13 @@
 
 #include <iostream>
 
+#include "InputWrapper.hpp"
+
 Game::Game()
 	: mWindow(std::make_shared<sf::RenderWindow>(sf::VideoMode(1280, 720), "Zuma"))
 {
 	mGameTime.restart();
+	InputWrapper::SetRenderWindow(mWindow);
 }
 
 bool Game::RunFrame()
