@@ -54,30 +54,17 @@ void Track::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	float splinePointCount = static_cast<float>(mPoints.size() - 3);
 	for (float t = 0.f; t < splinePointCount; t += 0.01f)
 	{
-		sf::CircleShape splinePoint(cLineThickness);
-		splinePoint.setPosition(GetPointOnSpline(t));
-		splinePoint.setFillColor(cLineColour);
-		target.draw(splinePoint);
+		target.draw(CreateCircle(cLineThickness, GetPointOnSpline(t), cLineColour));
 	}
 
-	sf::CircleShape startGuide(cGuidePointThickness);
-	sf::CircleShape endGuide(cGuidePointThickness);
+	target.draw(CreateCircle(cGuidePointThickness, mPoints[0], cGuidePointColour));
 
-	startGuide.setPosition(mPoints[0]);
-	endGuide.setPosition(mPoints[mPoints.size() - 1]);
-
-	startGuide.setFillColor(cGuidePointColour);
-	endGuide.setFillColor(cGuidePointColour);
-
-	target.draw(startGuide);
-	target.draw(endGuide);
+	int endGuideIndex = static_cast<int>(mPoints.size()) - 1;
+	target.draw(CreateCircle(cGuidePointThickness, mPoints[endGuideIndex], cGuidePointColour));;
 
 	for (int i = 1; i <= static_cast<int>(mPoints.size()) - 2; ++i)
 	{
-		sf::RectangleShape splineControlPoint({ cControlPointThickness, cControlPointThickness });
-		splineControlPoint.setPosition(mPoints[i]);
-		splineControlPoint.setFillColor(cControlPointColour);
-		target.draw(splineControlPoint);
+		target.draw(CreateControlPoint(i));
 	}
 }
 
@@ -85,7 +72,7 @@ sf::RectangleShape Track::CreateControlPoint(const int index) const
 {
 	sf::RectangleShape splineControlPoint({ cControlPointThickness, cControlPointThickness });
 	splineControlPoint.setPosition(mPoints[index]);
-	splineControlPoint.setFillColor(mSelectedPointIndex == index ? cSelectedPointColour : cControlPointColour);
+	splineControlPoint.setFillColor(cControlPointColour);
 	splineControlPoint.setOrigin({ cControlPointThickness * 0.5f, cControlPointThickness * 0.5f });
 
 	return splineControlPoint;
