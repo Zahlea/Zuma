@@ -8,6 +8,8 @@ class Track : public sf::Drawable
 public:
 	Track();
 
+	void Update(float deltaTime);
+
 private:
 	std::vector<sf::Vector2f> mPoints;
 

@@ -36,6 +36,8 @@ void Game::Update(float deltaTime)
 	{
 		QuitGame();
 	}
+
+	mBallTrack.Update(deltaTime);
 }
 
 void Game::Draw()

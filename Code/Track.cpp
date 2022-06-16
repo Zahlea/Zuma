@@ -20,6 +20,11 @@ Track::Track()
 	mPoints.push_back({ 270.f, 300.f });		// Guide point 1
 }
 
+void Track::Update(float deltaTime)
+{
+
+}
+
 sf::Vector2f Track::GetPointOnSpline(float t) const
 {
 	int p0, p1, p2, p3;
