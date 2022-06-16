@@ -3,7 +3,7 @@
 #include <iostream>
 
 Game::Game()
-	: mWindow(sf::VideoMode(1280, 720), "Zuma")
+	: mWindow(std::make_shared<sf::RenderWindow>(sf::VideoMode(1280, 720), "Zuma"))
 {
 	mGameTime.restart();
 }
@@ -11,23 +11,23 @@ Game::Game()
 bool Game::RunFrame()
 {
 	sf::Event event;
-	while (mWindow.pollEvent(event))
+	while (mWindow->pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
 		{
-			mWindow.close();
+			mWindow->close();
 		}
 	}
 
 	Update(mGameTime.restart().asSeconds());
 	Draw();
 
-	return mWindow.isOpen();
+	return mWindow->isOpen();
 }
 
 void Game::QuitGame()
 {
-	mWindow.close();
+	mWindow->close();
 }
 
 void Game::Update(float deltaTime)
@@ -42,7 +42,7 @@ void Game::Update(float deltaTime)
 
 void Game::Draw()
 {
-	mWindow.clear({ 100, 149, 237, 255 });
-	mWindow.draw(mBallTrack);
-	mWindow.display();
+	mWindow->clear({ 100, 149, 237, 255 });
+	mWindow->draw(mBallTrack);
+	mWindow->display();
 }

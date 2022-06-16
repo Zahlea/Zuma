@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <SFML/Graphics.hpp>
 
 #include "Track.hpp"
@@ -12,7 +14,7 @@ public:
 	void QuitGame();
 
 private:
-	sf::RenderWindow mWindow;
+	std::shared_ptr<sf::RenderWindow> mWindow;
 	sf::Clock mGameTime;
 
 	Track mBallTrack;
