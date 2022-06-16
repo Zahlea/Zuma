@@ -27,20 +27,26 @@ Track::Track()
 void Track::Update(float deltaTime)
 {
 	bool isMouseClicked = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	if (isMouseClicked && !mWasMouseClicked)
+	if (isMouseClicked)
 	{
-		float thicknessSqr = cControlPointThickness * cControlPointThickness;
-		for (int i = 0; i < static_cast<int>(mPoints.size()); ++i)
-		{
-			sf::Vector2f mousePosition = static_cast<sf::Vector2f>(InputWrapper::GetMousePosition());
-			sf::Vector2f mouseDelta = mousePosition - mPoints[i];
-			float distanceFromPointSqr = mouseDelta.x * mouseDelta.x + mouseDelta.y * mouseDelta.y;
+		if (!mWasMouseClicked) {
+			mSelectedPointIndex = -1;
+			float thicknessSqr = cControlPointThickness * cControlPointThickness;
+			for (int i = 0; i < static_cast<int>(mPoints.size()); ++i)
+			{
+				sf::Vector2f mousePosition = static_cast<sf::Vector2f>(InputWrapper::GetMousePosition());
+				sf::Vector2f mouseDelta = mousePosition - mPoints[i];
+				float distanceFromPointSqr = mouseDelta.x * mouseDelta.x + mouseDelta.y * mouseDelta.y;
 
-			if (std::abs(distanceFromPointSqr) < thicknessSqr) {
-				mSelectedPointIndex = i;
-				std::cout << "Selected index: " << i << std::endl;
-				break;
+				if (std::abs(distanceFromPointSqr) < thicknessSqr) {
+					mSelectedPointIndex = i;
+					std::cout << "Selected index: " << i << std::endl;
+					break;
+				}
 			}
+		}
+		else if(mSelectedPointIndex >= 0) {
+			mPoints[mSelectedPointIndex] = static_cast<sf::Vector2f>(InputWrapper::GetMousePosition());
 		}
 	}
 	mWasMouseClicked = isMouseClicked;
