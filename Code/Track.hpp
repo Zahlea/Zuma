@@ -15,4 +15,6 @@ private:
 
 	sf::Vector2f GetPointOnSpline(float t) const;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	sf::RectangleShape CreateControlPoint(const int index) const;
+	sf::CircleShape CreateCircle(const float radius, const sf::Vector2f& position, const sf::Color& colour = sf::Color::White) const;
 };

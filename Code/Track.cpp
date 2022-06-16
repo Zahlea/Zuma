@@ -80,3 +80,23 @@ void Track::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(splineControlPoint);
 	}
 }
+
+sf::RectangleShape Track::CreateControlPoint(const int index) const
+{
+	sf::RectangleShape splineControlPoint({ cControlPointThickness, cControlPointThickness });
+	splineControlPoint.setPosition(mPoints[index]);
+	splineControlPoint.setFillColor(mSelectedPointIndex == index ? cSelectedPointColour : cControlPointColour);
+	splineControlPoint.setOrigin({ cControlPointThickness * 0.5f, cControlPointThickness * 0.5f });
+
+	return splineControlPoint;
+}
+
+sf::CircleShape Track::CreateCircle(const float radius, const sf::Vector2f& position, const sf::Color& colour) const
+{
+	sf::CircleShape shape(radius);
+	shape.setOrigin({ radius, radius });
+	shape.setPosition(position);
+	shape.setFillColor(colour);
+
+	return shape;
+}
