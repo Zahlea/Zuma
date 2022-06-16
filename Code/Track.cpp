@@ -87,6 +87,11 @@ void Track::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		target.draw(CreateControlPoint(i));
 	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		target.draw(CreateCircle(6.f, static_cast<sf::Vector2f>(InputWrapper::GetMousePosition())));
+	}
 }
 
 sf::RectangleShape Track::CreateControlPoint(const int index) const
